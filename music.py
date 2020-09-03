@@ -27,20 +27,24 @@ for filename in filenames:
     pathfile = path + "\\" + filename
     audioinfo = eyed3.load(pathfile)
 
-    #in case the mp3 file doesn't have detail information, use the name of the mp3 file to  append the song list.
-    if not audioinfo.tag.title:
-        temp_name = re.findall("^(.+?).mp3",filename)[0].replace("_"," ")
-        name_song.append(temp_name)
-    else:
-        name_song.append(audioinfo.tag.title)
+    if audioinfo.tag:
+        #in case the mp3 file doesn't have detail information, use the name of the mp3 file to  append the song list.
+        if  audioinfo.tag.title:
+            name_song.append(audioinfo.tag.title)
+            
+        else:
+            temp_name = re.findall("^(.+?).mp3",filename)[0].replace("_"," ")
+            name_song.append(temp_name)
 
-    name_artist.append(audioinfo.tag.artist)
+        name_artist.append(audioinfo.tag.artist)
 
-    #in case the mp3 file doesn't have detail information, append the album list with nan
-    if not audioinfo.tag.album:
-        name_album.append(np.nan)
+        #in case the mp3 file doesn't have detail information, append the album list with nan
+        if not audioinfo.tag.album:
+            name_album.append(np.nan)
+        else:
+            name_album.append(audioinfo.tag.album)
     else:
-        name_album.append(audioinfo.tag.album)
+        continue
 
 #print the total number of the tracks obtained
 print(f"{str(len(name_song))} tracks obtained! ")
