@@ -1,3 +1,5 @@
+## IMPORTANT!!: This Project is not being maintained Anymore
+
 Automating Playlists on Spotify From the Music Folders of your Computer.
 
 An interesting way to export your music files to Spotify’s playlists.
